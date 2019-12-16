@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlinsample
+  labels:
+    app: kotlinsample
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kotlinsample
+  template:
+    metadata:
+      labels:
+        app: kotlinsample
+    spec:
+      containers:
+        - name: kotlinsample
+          image: soumeny2k/kotlinsample
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kotlinsample
+spec:
+  selector:
+    app: kotlinsample
+  ports:
+    - port: 8080
+  type: ClusterIP
